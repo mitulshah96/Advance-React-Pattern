@@ -1,45 +1,18 @@
-import React, { useState } from "react";
-import Expandable from "./Component/CompoundComponent/Expandable";
+import React from "react";
+import useExpanded from "./useExpanded";
+import useEffectAfterMount from "./useEffectAfterMount";
 import "./App.css";
 
-const information = [
-  {
-    header: "Why everyone should live forrever",
-    note: "This is highly sensitive information ... !!!!"
-  },
-  {
-    header: "The internet disappears",
-    note: "I just uncovered the biggest threat..."
-  },
-  {
-    header: "The truth about Elon musk and Mars!",
-    note: "Nobody tells you this..."
-  }
-];
-
 function App() {
-  const [activeIndex, setActiveIndex] = useState(null);
-  const onExpand = evt => setActiveIndex(evt.target.dataset.index);
-
+  const { expanded, toggle } = useExpanded();
+  useEffectAfterMount(() => {
+    // user can perform any side effect here 👇
+    console.log("Yay! button was clicked!!");
+  }, [expanded]);
   return (
-    <div className="App">
-      {information.map(({ header, note }, index) => (
-        <Expandable
-          shouldExpand={index === +activeIndex}
-          onExpand={onExpand}
-          key={index}
-        >
-          <Expandable.Header
-            // look here 👇
-            data-index={index}
-            style={{ color: "red", border: "1px solid teal" }}
-          >
-            {header}
-          </Expandable.Header>
-          <Expandable.Icon />
-          <Expandable.Body>{note}</Expandable.Body>
-        </Expandable>
-      ))}
+    <div style={{ marginTop: "3rem" }}>
+      <button onClick={toggle}>Click to view awesomeness...</button>
+      {expanded ? <p>{"😎".repeat(50)}</p> : null}
     </div>
   );
 }
