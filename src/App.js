@@ -4,14 +4,14 @@ import useEffectAfterMount from "./useEffectAfterMount";
 import "./App.css";
 
 function App() {
-  const { expanded, toggle } = useExpanded();
+  const { expanded, togglerProps } = useExpanded();
   useEffectAfterMount(() => {
     // user can perform any side effect here 👇
     console.log("Yay! button was clicked!!");
   }, [expanded]);
   return (
     <div style={{ marginTop: "3rem" }}>
-      <button onClick={toggle}>Click to view awesomeness...</button>
+      <button {...togglerProps}>Click to view awesomeness...</button>
       {expanded ? <p>{"😎".repeat(50)}</p> : null}
     </div>
   );
