@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { ExpandableContext } from "./Expandable";
 import "./Body.css";
 
-const Body = ({ children, className = "", ...otherProps }) => {
-  const { expanded } = useContext(ExpandableContext);
+const Body = ({ children, className = "", expanded, ...otherProps }) => {
+  // const { expanded } = useContext(ExpandableContext);
   const combinedClassNames = ["Expandable-panel", className].join("");
 
   return expanded ? (

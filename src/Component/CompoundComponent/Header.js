@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 import { ExpandableContext } from "./Expandable";
 import "./Header.css";
 
-const Header = ({ children, className = "", ...otherProps }) => {
-  const { toggle } = useContext(ExpandableContext);
+const Header = ({ children, className = "", toggle, ...otherProps }) => {
   const combinedClassName = ["Expandable-trigger", className].join("");
 
   return (
